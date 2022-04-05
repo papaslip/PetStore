@@ -1,0 +1,54 @@
+GET http://localhost:8080/user
+
+###
+
+GET http://localhost:8080/user/findByUsername?username=Papaslip
+
+###
+
+POST localhost:8080/user
+Content-Type: application/json
+
+{
+    "username": "Papaslip",
+    "firstName": "Sergey",
+    "lastName": "Kushuk",
+    "email": "papaslip@gmail.com",
+    "password": "123123",
+    "phone": "+375292754843",
+    "userStatus": "0"
+}
+
+###
+POST localhost:8080/user/createWithList
+Content-Type: application/json
+
+[
+  {
+    "username": "BytZ",
+    "firstName": "Sergey",
+    "lastName": "Kushuk",
+    "email": "papaslip@gmail.com",
+    "password": "123123",
+    "phone": "+375292754843",
+    "userStatus": "0"
+  },
+  {
+    "username": "Papaslip",
+    "firstName": "Sergey",
+    "lastName": "Kushuk",
+    "email": "papaslip@gmail.com",
+    "password": "123123",
+    "phone": "+375292754843",
+    "userStatus": "0"
+  },
+  {
+    "username": "Slip",
+    "firstName": "Sergey",
+    "lastName": "Kushuk",
+    "email": "papaslip@gmail.com",
+    "password": "123123",
+    "phone": "+375292754843",
+    "userStatus": "0"
+  }
+]
