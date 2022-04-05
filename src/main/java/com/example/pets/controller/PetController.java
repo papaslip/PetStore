@@ -1,5 +1,6 @@
 package com.example.pets.controller;
 
+
 import com.example.pets.entity.User;
 import com.example.pets.serice.PetService;
 import com.example.pets.entity.Pet;
@@ -50,6 +51,16 @@ public class PetController {
             pet.setId(petId);
             petRepository.save(pet);
             return ResponseEntity.ok(pet);
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @DeleteMapping("/{petId}")
+    public ResponseEntity<Pet> deletePetById(@PathVariable Long petId){
+        Optional<Pet> byId = petRepository.findById(petId);
+        if(byId.isPresent()){
+            petRepository.delete(byId.get());
+            return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
     }

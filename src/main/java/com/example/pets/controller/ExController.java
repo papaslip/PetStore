@@ -20,7 +20,7 @@ public class ExController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(IOException.class)
     public ResponseEntity<Object> iOHandleException (IOException ex) {
-        return new ResponseEntity<Object>("Not found file", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<Object>("Something went wrong when upload file", HttpStatus.BAD_REQUEST);
     }
 
 }
