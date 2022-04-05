@@ -1,5 +1,6 @@
 package com.example.pets.controller;
 
+import com.example.pets.entity.User;
 import com.example.pets.serice.PetService;
 import com.example.pets.entity.Pet;
 import com.example.pets.repository.PetRepository;
@@ -39,6 +40,16 @@ public class PetController {
         Optional<Pet> byId = petRepository.findById(petId);
         if(byId.isPresent()){
             return ResponseEntity.ok(byId.get());
+        }
+        return ResponseEntity.badRequest().build();
+    }
+    @PutMapping("/{petId}")
+    public ResponseEntity<Pet> updateById(@PathVariable Long petId, @RequestBody Pet pet){
+        Optional<Pet> byId = petRepository.findById(petId);
+        if(byId.isPresent()){
+            pet.setId(petId);
+            petRepository.save(pet);
+            return ResponseEntity.ok(pet);
         }
         return ResponseEntity.badRequest().build();
     }
