@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/pet")
@@ -21,7 +23,7 @@ public class PetController {
     private PetRepository petRepository;
 
     @PostMapping("/{petId}/uploadImage")
-    public ResponseEntity<Object> fileUpload(@PathVariable("petId") Long petId, @RequestParam("file") MultipartFile[] files) {
+    public ResponseEntity<Object> fileUpload(@PathVariable Long petId, @RequestParam("file") MultipartFile[] files) {
 
             petService.savePhoto(files,petId);
             return new ResponseEntity<Object>("successful operation",HttpStatus.OK);
@@ -32,8 +34,14 @@ public class PetController {
         petRepository.save(pet);
         return ResponseEntity.ok(pet);
     }
-
-
+    @GetMapping("/{petId}")
+    public ResponseEntity<Pet> getById(@PathVariable Long petId){
+        Optional<Pet> byId = petRepository.findById(petId);
+        if(byId.isPresent()){
+            return ResponseEntity.ok(byId.get());
+        }
+        return ResponseEntity.badRequest().build();
+    }
 
 
 
