@@ -1,6 +1,7 @@
 package com.example.pets.controller;
 
 
+import com.example.pets.IdNotFoundException;
 import com.example.pets.entity.User;
 import com.example.pets.serice.PetService;
 import com.example.pets.entity.Pet;
@@ -42,7 +43,7 @@ public class PetController {
         if(byId.isPresent()){
             return ResponseEntity.ok(byId.get());
         }
-        return ResponseEntity.badRequest().build();
+        throw new IdNotFoundException();
     }
     @PutMapping("/{petId}")
     public ResponseEntity<Pet> updateById(@PathVariable Long petId, @RequestBody Pet pet){
@@ -52,7 +53,7 @@ public class PetController {
             petRepository.save(pet);
             return ResponseEntity.ok(pet);
         }
-        return ResponseEntity.badRequest().build();
+        throw new IdNotFoundException();
     }
 
     @DeleteMapping("/{petId}")
@@ -62,7 +63,7 @@ public class PetController {
             petRepository.delete(byId.get());
             return ResponseEntity.ok().build();
         }
-        return ResponseEntity.badRequest().build();
+        throw new IdNotFoundException();
     }
 
 
